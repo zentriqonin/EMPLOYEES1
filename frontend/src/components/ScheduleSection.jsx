@@ -31,7 +31,7 @@ const ScheduleSection = ({ attendance, leaves }) => {
           <h3 className="font-extrabold text-brand-navy text-sm">{monthName} {year}</h3>
           <span className="text-xs text-brand-gold font-semibold cursor-pointer">View Details</span>
         </div>
-        
+
         {/* Week Headers */}
         <div className="grid grid-cols-7 gap-1 text-center text-xs font-bold text-brand-muted mb-2">
           <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
@@ -49,9 +49,8 @@ const ScheduleSection = ({ attendance, leaves }) => {
             return (
               <span
                 key={day}
-                className={`py-1 rounded-full flex flex-col items-center justify-center relative cursor-pointer ${
-                  isToday ? 'bg-brand-navy text-brand-gold font-bold' : 'hover:bg-brand-warmgray'
-                }`}
+                className={`py-1 rounded-full flex flex-col items-center justify-center relative cursor-pointer ${isToday ? 'bg-brand-navy text-brand-gold font-bold' : 'hover:bg-brand-warmgray'
+                  }`}
               >
                 {day}
                 {/* Visual Status Indicator dots */}
@@ -87,10 +86,9 @@ const ScheduleSection = ({ attendance, leaves }) => {
                   <span className="text-xs font-bold text-brand-navy uppercase tracking-wide">
                     {l.leaveTypeName}
                   </span>
-                  <span className={`text-xs px-2 py-0.5 font-bold rounded-full ${
-                    l.status === 'APPROVED' ? 'bg-green-100 text-green-700' :
-                    l.status === 'REJECTED' ? 'bg-red-100 text-red-700' : 'bg-orange-100 text-orange-700'
-                  }`}>
+                  <span className={`text-xs px-2 py-0.5 font-bold rounded-full ${l.status === 'APPROVED' ? 'bg-green-100 text-green-700' :
+                      l.status === 'REJECTED' ? 'bg-red-100 text-red-700' : 'bg-orange-100 text-orange-700'
+                    }`}>
                     {l.status}
                   </span>
                 </div>
