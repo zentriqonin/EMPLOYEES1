@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://srv-da019s49v7es738bs2cg:8085',
+        target: 'https://erp1backend-production.up.railway.app',
         changeOrigin: true
       }
     }
