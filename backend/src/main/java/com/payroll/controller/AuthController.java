@@ -22,17 +22,22 @@ public class AuthController {
     private EmployeeService employeeService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, jakarta.servlet.http.HttpServletResponse httpServletResponse) {
-        AuthResponse response = authService.login(loginRequest);
-        
-        jakarta.servlet.http.Cookie cookie = new jakarta.servlet.http.Cookie("jwt_token", response.getToken());
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(24 * 60 * 60); // 1 day
-        httpServletResponse.addCookie(cookie);
-        
-        response.setToken(null);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, jakarta.servlet.http.HttpServletResponse httpServletResponse) {
+        try {
+            AuthResponse response = authService.login(loginRequest);
+            
+            jakarta.servlet.http.Cookie cookie = new jakarta.servlet.http.Cookie("jwt_token", response.getToken());
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
+            cookie.setMaxAge(24 * 60 * 60); // 1 day
+            httpServletResponse.addCookie(cookie);
+            
+            response.setToken(null);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace(); // Ensures the stack trace prints in Railway Deploy Logs
+            return ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).body("Invalid Credentials");
+        }
     }
 
     @PostMapping("/logout")
